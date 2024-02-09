@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/public/style.css">
+
+    <style>
+        .box{
+    align-items: center;
+    text-align: center;
+}
+body{
+    background-color: rgb(197, 204, 211);
+}
+
+    </style>
+</head>
+<body>
+    <div class="box">
+
+    <h1>Weather Checker</h1>
+    <form action="/" method="post">
+    <input type="text" placeholder="Enter City Name here" spellcheck="false" class="cityName" name="cityName">
+    </form>
+
+    <% if(locals.data){ %>
+
+    <h2> City: <%= data.name %> </h2>
+    <h3>  Temperature: <%= (data.main.temp - 273.15).toFixed(2) %> °C </h3>
+    <p>Feels Like: <%= (data.main.feels_like - 273.15).toFixed(2) %> &#8451;</p>
+    <p>Description: <%= data.weather[0].main %></p>
+    <p>   Humidity:  <%= data.main.humidity %> % </p>   
+    <p>Sunrise: <%= new Date(data.sys.sunrise * 1000).toLocaleTimeString() %></p>
+    <p>Sunset: <%= new Date(data.sys.sunset * 1000).toLocaleTimeString() %></p>
+
+
+    <% }else if(locals.error) { %>
+        <p> Incorrect City Name </p>
+
+    <% }else { %>
+                 <p> </p>                    
+        <% } %>
+
+    </div>
+
+    
+    <script src="index.js"></script>
+</body>
+</html>
